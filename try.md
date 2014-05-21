@@ -7,16 +7,18 @@
 hfeiufhi
 
 hefuhifu
-`(defn f []
+` (defn f []
     
     (println "hello world"))
     `
 
-`function fact(n)
+<code>
+function fact(n)
     function iter(n,acc)
         if n==0 then 
             return acc
         else fact(n-1,acc*n) end
     end
     return iter(n,1)
-end`
+end
+</code>
