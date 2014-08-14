@@ -15,11 +15,17 @@ HDFS设计成一个类似标准Unix文件系统的分布式文件系统,数据�
 
 你可以通过JAVA API或者 hadoop 命令行工具来访问数据.许多文件系统操作都是从Unix移植过来的.来看几个简单的例子:
 列出根目录下的文件
+
 `hadoop fs -ls /`
+
 列出home 路径下的文件
+
 `hadoop fs -ls ./`
+
 输出一个文件(如果需要会解压缩)
+
 `hadoop fs -text ./file.txt.gz`
+
 上传或者下载一个文件
 ```
 hadoop fs -put ./localfile.txt /home/matthew/remotefile.txt
@@ -32,12 +38,48 @@ hadoop fs -get ./home/matthew/remotefile.txt ./local/file/path/file.txt
 HDFS也有一些特性让它更适用于分布式环境.
 
 - **容错机制** 数据被复制到多个节点以防止机器故障,业内公认的标准是复制3份(所有数据都会分配到三台机器上).
-
 - **扩展性** 数据迁移直接在数据节点上进行,所以读写的兼容性很容易扩展到很多数据节点上. 
 - **存储空间** 想要更多存储空间只需要买更多的数据节点就行.
 - **行业标准** 很多分布式应用都基于HDF(HBase , Map-Reduce) 
 - **和Mapreduce 配合默契**
 
 ###MapReduce###
+
 Hadoop基础的第二部分就是 MapReduce 模块, 由两个组件构成.
-- 
+- 一套API,使用JAVA来编写MapReduce工作流程.
+- 一系列服务,用来管理工作流程的执行.
+
+**map 和 reduce API**
+
+基本流程是这样:
+1. Map任务执行数据转换
+2. Reduce任务执行数据合并
+
+用scala实现一个简单的mapreduce 任务如下:
+```scala
+def map(lineNumber: Long, sentence: String)= {
+    var words = sentence.split()
+    words.foreach{ word => 
+	output(word , 1)
+  }
+}
+def reduce(word: String, counts: Iterable[Long]) = {
+  var total = 0l
+  counts.foreach { count => 
+    total += count
+  }
+    output(word, total)
+}
+```
+请注意map reduce 任务的输入输出都是 KEY,VALUE 对.程序永远输出一个key,一个value.
+reduce的输入是KEY,ITERABLE[VALUE].对于map程序生成的每一个输出,reduce只执行一次.
+ITERABLE[VALUE]是map输出的某个key的所有value.
+
+因此如果你的map任务这样输出
+
+```
+map1: key: foo, value: 1
+map2: key: foo, value: 32
+```
+
+
