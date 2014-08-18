@@ -81,5 +81,43 @@ ITERABLE[VALUE]是map输出的某个key的所有value.
 map1: key: foo, value: 1
 map2: key: foo, value: 32
 ```
+reduce 任务会收到:
+
+```
+key: foo, values: [1, 32]
+```
+其实在map和reduce中间还有一个Mapreduce任务中非常重要的部分,分为三步:Partitioning, Sorting, Grouping. 在默认配置中,这些中间步骤的目标是保证value根据key进行分组,以便传递给reduce函数. 他们也提供了一些API让你去自己调整这些中间步骤(比如你想进行二次排序)
+
+下面的框图展示了整个工作流程,以及各组件是如何组织在一起的,但是真正重要的是理解map和reduce任务是如何协作的,而不是弄懂这些程序的实现细节.
+
+这些API真正牛逼的地方在于任意两个相同的任务之间没有依赖关系.一个map任务不会去
+关心别的map任务,同样一个reduce任务拥有所有合并数据所需的上下文,不会与其他reduce任务共享数据.
+
+从整体来看,这样的设计意味着管道式步骤可以轻松地分布到任意数量的机器上.工作流程所需的大数据集可以轻松地分布到数百台机器上,因为任务之间没有依赖,不需要处于同一台机器上.
+
+**Mapreduce API 资源**
+如果想了解更多Mapreduce的知识(包括hadoop),我推荐你去读谷歌的Mapreduce论文,Apache的Mapreduce文档,或者hadoop book. 搜索一下mapreduce 教程也能得到很多有用的信息.
+
+为了让hadoop变得更有趣,人们开发了很多基于mapreduce API的项目使得开发Mapreduce 工作流更容易.比如Hive让你可以不用Java而用SQL查询HDFS的数据,还有很多这样的项目,如果你对这些框架有兴趣,以后我还会写篇文章来细说一下.
+
+**运行mapreduce任务的hadoop服务**
+Hadoop Mapreduce 通过两个主要的服务来调度和运行Mapreduce 任务,它们是Job Tracker
+(JT)和Task Tracker(TT).通常JT是主服务,它负责向task tracker 分配任务,并且对所有的任务做全局的调度.Task tracker负责运行map reduce 任务.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
