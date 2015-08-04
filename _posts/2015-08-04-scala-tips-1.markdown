@@ -4,10 +4,9 @@ title: Scala tips 1
 --- 
 ## scala 笔记 1
 
+
 ### 函数定义：
-```scala
-def func (arg1: type1, arg2: type2 ,... ) type  = body
-```
+`def func (arg1: type1, arg2: type2 ,... ) type  = body`
 
 类声明：
 class MongoClient(val host : String , val port : Int)
@@ -17,24 +16,23 @@ class MongoClient(val host : String , val port : Int)
 
 ### package 对象：
 普通的包声明，只能包含类，trait 和单例。但是通过定义package 对象，可让package 拥有 val, var, method之类的成员。
-```scala
+{% highlight scala linenos %}
 package object bar {
 val minimumAge = 18
 def verifyAge = {}
 }
-```
+{% endhighlight %}
 比如这个例子，给 bar 包定义了两个成员，可以通过
 `bar.minimumAge` 和`bar.verifyAge` 来访问
 
 
 ### `case class` under the hood:
 case class 把java式的 switch 匹配 扩展到了类型的范畴。例如，
-```scala
-case Person(foo, bar) => println(foo, bar)
-``` 
+`case Person(foo, bar) => println(foo, bar)` 
 foo 和bar 可以直接被引用。
 如果我们手动实现case class ，看起来也许是这样的:
-```scala
+{% highlight scala linenos %}
+
 object Person {
 def apply(firstName:String, lastName:String) = {
 new Person(firstName, lastName)
@@ -42,36 +40,36 @@ new Person(firstName, lastName)
 def unapply(p:Person): Option[(String, String)] =
 Some((p.firstName, p.lastName))
 }
-```
+{% endhighlight %}
+
 apply 方法很好理解，unapply 方法，似乎做了相反的事情，当Person 实例被匹配后，unapply 方法解包了Person的参数，返回一个元组。
 
-```code
+{% highlight scala linenos %}
 scala> Max(10) + Max(30) + Max(20)
 res1: com.twitter.algebird.Max[Int] = Max(30)
 
 // Alternative, Java-like (read: ugly) syntax for readers unfamiliar with Scala.
 scala> Max(10).+(Max(30)).+(Max(20))
 res2: com.twitter.algebird.Max[Int] = Max(30)
-```
+{% endhighlight %}
 
 ### implicit 隐式转换
 
 作为强类型语言 ，下面的赋值将会引发一个类型匹配错误：` val some : Int = 2.2`
 报错：
-``` scala
+{% highlight scala linenos%}
 <console>:11: error: type mismatch;
  found   : Double(2.2)
  required: Int
        val some : Int = 2.2
-```
-
+{% endhighlight %}
 如果定义一个implicit 开头的函数：
-```scala
+{% highlight scala linenos%}
 implicit def Double2Int(n : Double) : Int = n.toInt
-```
+{% endhighlight %}
 再执行上面的赋值语句，会执行隐式的 类型转换
-```scala
+{% highlight scala linenos%}
 scala> val some : Int = 2.2
 some: Int = 2
-```
+{% endhighlight %}
 当类型匹配失败时， runtime 会在当前作用域下寻找一个 入参类型和返回类型 正好与要转换的类型匹配的函数，调用这个函数完成类型转换。类型的转换与函数名无关，只与入参类型和返回类型有关。
