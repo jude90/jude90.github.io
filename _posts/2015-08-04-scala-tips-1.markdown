@@ -1,3 +1,7 @@
+---
+layout: post
+title: Scala tips 1 
+--- 
 ## scala 笔记 1
 
 ### 函数定义：
