@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Scala tips 1 
+title: hadoop 初学者指南
 category: java hadoop 
 --- 
 ## hadoop 初学者指南##
@@ -61,6 +61,7 @@ Hadoop基础的第二部分就是 MapReduce 模块, 由两个组件构成.
 2. Reduce任务执行数据合并
 
 用scala实现一个简单的mapreduce 任务如下:
+
 ```scala
 def map(lineNumber: Long, sentence: String)= {
     var words = sentence.split()
@@ -76,6 +77,7 @@ def reduce(word: String, counts: Iterable[Long]) = {
     output(word, total)
 }
 ```
+
 请注意map reduce 任务的输入输出都是 KEY,VALUE 对.程序永远输出一个key,一个value.
 reduce的输入是KEY,ITERABLE[VALUE].对于map程序生成的每一个输出,reduce只执行一次.
 ITERABLE[VALUE]是map输出的某个key的所有value.
