@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Scala tips 1 
+category: scala
 --- 
 ## scala 笔记 1
 
@@ -16,12 +17,13 @@ class MongoClient(val host : String , val port : Int)
 
 ### package 对象：
 普通的包声明，只能包含类，trait 和单例。但是通过定义package 对象，可让package 拥有 val, var, method之类的成员。
-{% highlight scala linenos %}
+
+```scala
 package object bar {
 val minimumAge = 18
 def verifyAge = {}
 }
-{% endhighlight %}
+```
 比如这个例子，给 bar 包定义了两个成员，可以通过
 `bar.minimumAge` 和`bar.verifyAge` 来访问
 

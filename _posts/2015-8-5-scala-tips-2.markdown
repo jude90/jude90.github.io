@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Scala tips 2
+category: scala
 ---
 ### Scala 笔记2
 
