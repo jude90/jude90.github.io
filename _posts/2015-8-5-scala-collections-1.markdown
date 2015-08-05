@@ -3,10 +3,11 @@ layout: post
 title: Scala tuple & case class
 category: scala
 --- 
-### Scala 笔记3 tuple % case class
+### Scala 笔记3 tuple & case class
 
 **tuple**:穷人的`case class`
-tuple 对于 scala 和python 来说是截然不同的概念.
+
+Tuple 对于 scala 和python 来说是截然不同的概念.
 python的tuple 就像 immutable list, 除了`immutable`之外和list 用法差不多.
 
 而对于Scala, `tuple`是很不一样的东西,它不是固化的列表, 更像是穷人的`case class`.
