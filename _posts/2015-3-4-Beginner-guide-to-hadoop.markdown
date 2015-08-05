@@ -1,3 +1,8 @@
+---
+layout: post
+title: Scala tips 1 
+category: java hadoop 
+--- 
 ## hadoop 初学者指南##
     这篇文章写给对零基础的初学者.不讲具体的开发,只是介绍整个体系的基础知识.
     首先,Hadoop是一个Apache软件基础项目,它提供了:
