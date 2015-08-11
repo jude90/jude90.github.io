@@ -1,5 +1,5 @@
 # Site settings
-title: La mia Scala
+title: 叙事学派
 email: 
 description: > # this means to ignore newlines until "baseurl:"
   
@@ -9,10 +9,5 @@ twitter_username: jekyllrb
 github_username:  jude90
 
 # Build settings
-# markdown: kramdown
-markdown: redcarpet
-kramdown:
-  input: GFM
-# pygments: true
-
+markdown: kramdown
 highlighter: pygments
