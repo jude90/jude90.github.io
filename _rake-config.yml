@@ -4,7 +4,7 @@
 page:
   template: _page.txt
   extension: md
-editor: subl
+editor: sublime
 git:
   branch: master
 transfer:

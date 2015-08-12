@@ -9,5 +9,6 @@ twitter_username: jekyllrb
 github_username:  jude90
 
 # Build settings
-markdown: kramdown
+# markdown: kramdown
+markdown: redcarpet
 highlighter: pygments
