@@ -73,3 +73,11 @@ hadoop 的其他脚本在启动时都会执行hadoop-env.sh或者环境变量。
 当我关掉了 所有数据节点的 iptables，文件就正常地上传了，没有报错。（数据节点都是 redhat6.5）以后安装好hadoop 以后还得记得关掉防火墙。
 
 这就是我短暂而繁琐的hadoop安装生涯中遇到过的玄学问题。想把玄学变成科学，至少是可控的工程学，还需要阅读大量的手册，理解hadoop的工作原理和配置参数的意义。一万年太久，只争朝夕。
+
+参考：
+
+[hadoop 完全分布式安装](http://blog.csdn.net/ab198604/article/details/8250461)
+
+[hadoop pid 文件存放](http://www.cnblogs.com/gcczhongduan/p/4297023.html)
+
+[could only be replicated to 0 nodes, instead of 1](http://stackoverflow.com/questions/5293446/hdfs-error-could-only-be-replicated-to-0-nodes-instead-of-1)
