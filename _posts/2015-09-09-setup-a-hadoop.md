@@ -6,8 +6,8 @@ date: 2015-09-09 15:30:08
 
 ### 部署
 每个大数据小白都是从 动手安装hadoop 开始他的大数据库之旅的。
-- 第一步，在所有节点上创建相同的用户，比如叫hadoop。
 
+- 第一步，在所有节点上创建相同的用户，比如叫hadoop。
 - 生成 ssh 密钥，实现主节点到所有从节点的无密码登陆。hadoop 的很多操作依赖 ssh 登陆。因此这一步很关键。
 - 写好hosts 文件，发送到所有节点。hosts 中主机名必须和该主机的hostsname 一致。否则可能出问题。在更大规模的部署中，DNS 服务器会代替 hosts 文件。
 - 安装 JAVA。想让hadoop 正常启动 ，需要在 环境变量里 配置好JAVA_HOME 。平时我们装java ，会把 JAVA_HOME 写在 /etc/profile 里面，而hadoop 项目提供了脚本hadoop-env.sh 来收集原本散落各处，hadoop 运行所需的环境变量。
@@ -22,16 +22,21 @@ hadoop 的其他脚本在启动时都会执行hadoop-env.sh或者环境变量。
 
 这三个文件的初始状态是一个空的 `configuration` 标签。
 在 core-site.xml 里面，我配置了
-`fs.default.name` 
-`hadoop.tmp.dir`
-`dfs.name.dir`
+
+- `fs.default.name` 
+- `hadoop.tmp.dir`
+- `dfs.name.dir`
+
 在 hdfs-site.xml 里面 配置了
-`dfs.replication`
-`dfs.data.dir`
+
+- `dfs.replication`
+- `dfs.data.dir`
+
 在 mapred-site.xml 里面配置
-`mapred.job.tracker`
-`mapred.system.dir`
-`mapred.local.dir`
+
+- `mapred.job.tracker`
+- `mapred.system.dir`
+- `mapred.local.dir`
 
 可以看出，这些都是hadoop启动需要的关键参数，比如主节点服务的端口号。NameNode ,DataNode 数据存放的位置。然而如果不写这些参数，hadoop 也会使用默认的配置参数，比`hadoop.tmp.dir` 如果不设置，hadoop就会默认 /tmp 作为 hadoop的 临时目录。
 还有 `dfs.name.dir`, `dfs.data.dir` 都有各自的默认配置。以上配置中似乎只有`fs.default.name`和 `mapred.job.tracker` 是必须配置的，否则不能正常启动。
@@ -54,8 +59,8 @@ hadoop 的其他脚本在启动时都会执行hadoop-env.sh或者环境变量。
 集群在启动的时候，每个进程都会生成一个对应的pid 文件。这些pid 文件最初放在 /tmp 下面， 而启动时会有报错显示 hadoop 用户没有 /tmp 的写权限。导致启动失败。解决办法可以是 修改 hadoop 用户的权限，让他能够在 /tmp 目录写文件。也可以修改 hadoop-env.sh 中的参数HADOOP_PID_DIR ，指向hadoop用户可写的路径。比如/home/hadoop/tmp
 
 **HDFS error: could only be replicated to 0 nodes, instead of 1**
-当HDFS正常启动，我迫不及待地 上传了一个文件到hdfs 来验证它是否工作正常。
-简直是荒唐，所有节点都启动正常。NameNode ，DataNode 进程都活着，为什么会出现这样的错误？
+当HDFS正常启动，我迫不及待地 上传了一个文件到hdfs 来验证它是否工作正常。然后就得到了上面的报错。
+这简直是荒唐，因为所有节点都启动正常。NameNode ，DataNode 进程都活着，为什么会出现这样的错误？
 爆栈的解释是，可能存在以下情况：
 
  - 数据节点磁盘用完了
@@ -64,4 +69,7 @@ hadoop 的其他脚本在启动时都会执行hadoop-env.sh或者环境变量。
  - 等等等等。。 
 
 然而解决方法却异常的简洁： `service iptables stop`.
+
 当我关掉了 所有数据节点的 iptables，文件就正常地上传了，没有报错。（数据节点都是 redhat6.5）以后安装好hadoop 以后还得记得关掉防火墙。
+
+这就是我短暂而繁琐的hadoop安装生涯中遇到过的玄学问题。想把玄学变成科学，至少是可控的工程学，还需要阅读大量的手册，理解hadoop的工作原理和配置参数的意义。一万年太久，只争朝夕。
