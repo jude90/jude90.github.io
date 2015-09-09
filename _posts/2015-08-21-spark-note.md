@@ -52,7 +52,7 @@ charCounts.collect()
 
 两个 `reduceByKey` 把整个计算过程 分成了三个部分，它们根据RDD 的键 将数据重排， 生成新的RDD分区。
 
-在 `stage`的边界，也就是`groupByKey`执行之处，数据会被上一个`stage`的 `task` 写入磁盘，并且通过网络被下一个`stage`的`task`读取。因为会带来严重的磁盘和网络IO 开销，`stage`的边界是昂贵的，需要尽量避免。`stage`之间 RDD的分区数量通常不一样，所以可能触发`stage`边界的transformation 函数都会提供一个`numPartitions`参数来让你觉定在下一个`stage` 使用多少个数据分区。
+在 `stage`的边界，也就是`groupByKey`执行之处，数据会被上一个`stage`的 `task` 写入磁盘，并且通过网络被下一个`stage`的`task`读取。因为会带来严重的磁盘和网络IO 开销，`stage`的边界是昂贵的，需要尽量避免。`stage`之间 RDD的分区数量通常不一样，所以可能触发`stage`边界的transformation 函数都会提供一个`numPartitions`参数来让你决定下一个`stage` 使用多少个数据分区。
 
 参考
 [how to tune your spark jobs](http://blog.cloudera.com/blog/2015/03/how-to-tune-your-apache-spark-jobs-part-1/)
