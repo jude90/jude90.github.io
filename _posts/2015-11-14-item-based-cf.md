@@ -1,5 +1,5 @@
 ---
-title: "推荐系统笔记 Item based 协同过滤 
+title: "推荐系统笔记 Item based 协同过滤 "
 layout: post
 date: 2015-11-14 15:01:00
 ---
