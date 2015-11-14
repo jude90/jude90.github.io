@@ -11,4 +11,4 @@ github_username:  jude90
 # Build settings
 markdown: kramdown
 # markdown: redcarpet
-# highlighter: pygments
+highlighter: pygments

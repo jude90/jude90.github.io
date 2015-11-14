@@ -1,10 +1,10 @@
 ---
-title: "item based cf" 
+title: "推荐系统笔记 Item based 协同过滤 
 layout: post
 date: 2015-11-14 15:01:00
 ---
 
-### 推荐系统笔记
+### 
 
 上周读了《推荐系统实践》，作者重点讲解了协调过滤，而在协同过滤中又着重讲了基于用户（User Based）和基于物品(Item Based) 两种算法。
 
