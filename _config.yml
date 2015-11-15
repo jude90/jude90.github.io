@@ -13,10 +13,7 @@ github_username:  jude90
 # markdown: redcarpet
 highlighter: pygments
 highlight: true
-# pygments:    true
 
-# markdown: redcarpet
-# highlighter: pygments
 markdown: kramdown
 kramdown:
   input: GFM          
