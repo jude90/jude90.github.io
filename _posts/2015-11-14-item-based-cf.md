@@ -23,6 +23,7 @@ date: 2015-11-14 15:01:00
 推荐物品的Spark实现如下
 
 ```scala
+
 def RecommendTop(userprefs:SparseVector,
                    similar:RDD[(Int, SparseVector)],
                    topk:Int =10,nums:Int=10)(implicit sc:SparkContext): Array[(Int,Double)] ={
