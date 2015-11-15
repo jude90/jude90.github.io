@@ -9,6 +9,14 @@ twitter_username: ""
 github_username:  jude90
 
 # Build settings
-markdown: kramdown
+# markdown: kramdown
 # markdown: redcarpet
 highlighter: pygments
+highlight: true
+# pygments:    true
+
+# markdown: redcarpet
+# highlighter: pygments
+markdown: kramdown
+kramdown:
+  input: GFM          
