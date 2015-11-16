@@ -17,5 +17,7 @@ highlight: true
 # markdown: kramdown
 # kramdown:
 #   input: GFM          
-# paginate: 5
+paginate: 8
+paginate_path: "/blog/page:num"
+
 # paginate_path: "page:num"
