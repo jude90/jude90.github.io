@@ -10,10 +10,10 @@ github_username:  jude90
 
 # Build settings
 # markdown: kramdown
-# markdown: redcarpet
+markdown: redcarpet
 highlighter: pygments
 highlight: true
 
-markdown: kramdown
-kramdown:
-  input: GFM          
+# markdown: kramdown
+# kramdown:
+#   input: GFM          
