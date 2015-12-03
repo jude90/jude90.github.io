@@ -4,7 +4,6 @@ layout: post
 date: 2015-11-14 15:01:00
 ---
 
-### 推荐系统笔记
 
 上周读了《推荐系统实践》，作者重点讲解了协调过滤，而在协同过滤中又着重讲了基于用户（User Based）和基于物品(Item Based) 两种算法。
 
@@ -62,7 +61,10 @@ def RecommendTop(userprefs:SparseVector,
 - 覆盖率: 表示推荐的物品占了物品全集空间的多大比例。
 - 新颖度: 新颖度是为了推荐长尾区间的物品。用推荐列表中物品的平均流行度度量推荐结果的新颖度。如果推荐出的物品都很热门，说明推荐的新颖度较低，否则说明推荐结果比较新颖
 
+![准确率与召回率](http://img.my.csdn.net/uploads/201106/14/0_1308034676G5GQ.gif)
+
 **Precision/Recall**
+
 为了计算提高效率 准确率和 召回率用实现在了同一个函数里面
 
 ```scala
@@ -95,7 +97,7 @@ def RecommendTop(userprefs:SparseVector,
   }
 ```
 
-这个函数做的事情很简单，但是我花了好一会儿才写对。最初我对用户的物品列表求推荐列表，得到推荐列表后在与物品列表求交集。把交集的数量作为推荐命中数量。然后问题来了，推荐算法会过滤掉用户列表里面已经存在的物品
+这个函数做的事情很简单，但是花了我好一会儿才写对。最初我对用户的物品列表求推荐列表，得到推荐列表后在与物品列表求交集。把交集的数量作为推荐命中数量。然后问题来了，推荐算法会过滤掉用户列表里面已存在的物品。如果验证集与预测集相同，预测的结果将无法命中验证集（命中的都被过滤啦），也就无法检验推荐算法的推荐效果。所以需要将用户列表随机拆分成两个不重叠的子集。分别作为推荐算法的输入，以及推荐结果的验证集。
 
 
 [代码已经放在github](https://github.com/jude90/recomovies) 
@@ -106,4 +108,6 @@ def RecommendTop(userprefs:SparseVector,
 
 [推荐系统中协同过滤算法实现分析](http://my.oschina.net/BreathL/blog/62519)
 
-[用spark实现基于物品属性相似度的推荐算法](http://3iter.com/2015/10/12/%E7%94%A8spark%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E5%B1%9E%E6%80%A7%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/)
+[推荐系统评测指标](http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/)
+
+[准确率 召回率 ](http://blog.csdn.net/wangzhiqing3/article/details/9058523)
