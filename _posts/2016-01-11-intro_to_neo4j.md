@@ -30,7 +30,7 @@ neo4j 的Relation 用 ` -[ooxx]->` 来表示，例如：
 节点和关系 都可以拥有 properties 。properties 是键值对，用来给节点和关系 添加一些属性信息。比如 `演员`j节点可能有一个`name`属性和一个`born`属性表示出生年份；`电影`节点 可能会包含 一个`title` 属性。
 
 节点的属性表达方式如下：
-
+ 	
 - `(m {title:"The Matrix"})` : 一个带有 `title`属性的 电影
 -  `(a {name:"Keanu Reeves",born:1964})`: 一个带有名字和出生年份的演员
 
